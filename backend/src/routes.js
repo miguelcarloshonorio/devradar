@@ -11,6 +11,7 @@ routes.get('/', (req, res)=>{
 
 routes.post('/devs', DevController.store);
 routes.get('/devs', DevController.index);
+routes.delete('/devs/:id', DevController.delete);
 
 routes.get('/search', SearchController.index);
 
