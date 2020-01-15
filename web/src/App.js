@@ -27,25 +27,29 @@ function App() {
 
   async function handleDelete(dev) {
     const response = await api.delete(`/devs/${dev._id}`);
-    const letDevs = devs.filter(d=> d._id !== dev._id);
-    setDevs(letDevs);
+    if (response.data) {
+      const letDevs = devs.filter(d => d._id !== dev._id);
+
+      setDevs(letDevs);
+    }
   }
-  
 
   return (
-    <div id="app">
-      <aside>
-        <strong>Cadastrar</strong>
-        <DevForm onSubmit={handleAddDev}/>
-      </aside>
-      <main>
-        <ul>
-          {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev} onDelete={handleDelete} />
-          ))}
-        </ul>
-      </main>
-    </div>
+    <>
+      <div id="app">
+        <aside>
+          <strong>Cadastrar</strong>
+          <DevForm onSubmit={handleAddDev} />
+        </aside>
+        <main>
+          <ul>
+            {devs.map(dev => (
+              <DevItem key={dev._id} dev={dev} onDelete={handleDelete} />
+            ))}
+          </ul>
+        </main>
+      </div>
+    </>
   );
 }
 
